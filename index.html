@@ -4,89 +4,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DANI0098</title>
+<meta name="theme-color" content="#101010">
+<title>DANI0098 | پنل پیامک</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#101010;color:white;font-family:Tahoma,Arial;padding:20px}
+body{
+ margin:0;
+ background:#101010;
+ color:#fff;
+ font-family:Tahoma,Arial;
+ padding:18px;
+}
 main{max-width:480px;margin:auto}
-header{text-align:center;padding:25px;color:#dfbd75}
-.logo{border:2px solid #dfbd75;border-radius:20px;width:75px;height:75px;margin:auto;display:grid;place-items:center;font-size:22px;font-weight:bold}
-h1{font-size:25px}
-.card{background:#202020;border:1px solid #49402d;border-radius:18px;padding:18px;margin:16px 0}
-label{display:block;margin:14px 0 8px;font-size:13px}
-input,textarea{width:100%;background:#111;color:white;border:1px solid #555;border-radius:10px;padding:13px;font:14px Tahoma}
-textarea{height:110px;resize:vertical}
-button{width:100%;padding:14px;margin-top:13px;border:0;border-radius:10px;background:#dfbd75;color:#17120a;font-weight:bold;font-size:14px}
-.note{color:#e7ce9b;font-size:12px;line-height:2}
-.preview{white-space:pre-wrap;background:#111;padding:13px;border-radius:10px;margin-top:12px;line-height:2;font-size:13px}
-.entry{border-bottom:1px solid #444;padding:12px 0;line-height:2;font-size:13px}
+header{text-align:center;padding:25px 10px}
+.logo{
+ width:82px;height:82px;
+ border:2px solid #dfbd75;
+ border-radius:22px;
+ display:grid;place-items:center;
+ margin:auto;
+ color:#dfbd75;
+ font-size:23px;font-weight:bold;
+}
+h1{color:#dfbd75;font-size:27px}
+.subtitle{color:#aaa;font-size:12px}
+.card{
+ background:#202020;
+ border:1px solid #51452f;
+ border-radius:18px;
+ padding:18px;
+ margin:16px 0;
+}
+h3{color:#dfbd75}
+label{
+ display:block;
+ margin:15px 0 8px;
+ font-size:13px;
+}
+input,textarea{
+ width:100%;
+ background:#111;
+ border:1px solid #555;
+ border-radius:11px;
+ padding:14px;
+ color:white;
+ font:14px Tahoma;
+}
+textarea{height:115px;resize:vertical;line-height:2}
+button{
+ width:100%;
+ padding:14px;
+ margin-top:13px;
+ border:0;
+ border-radius:11px;
+ background:#dfbd75;
+ color:#17120a;
+ font-weight:bold;
+ font-size:14px;
+ cursor:pointer;
+}
+.secondary{
+ background:#292929;
+ border:1px solid #dfbd75;
+ color:#dfbd75;
+}
+.notice{
+ background:#302719;
+ border:1px solid #725b30;
+ color:#f0d9a6;
+ padding:13px;
+ border-radius:12px;
+ font-size:12px;
+ line-height:2;
+}
+.preview{
+ white-space:pre-wrap;
+ background:#111;
+ border-radius:12px;
+ padding:14px;
+ margin-top:12px;
+ font-size:13px;
+ line-height:2;
+}
+.entry{
+ border-bottom:1px solid #444;
+ padding:13px 0;
+ font-size:13px;
+ line-height:2;
+}
 small{color:#aaa}
+footer{text-align:center;color:#777;font-size:11px;margin:25px 0}
 </style>
 </head>
+
 <body>
 <main>
+
 <header>
 <div class="logo">D09</div>
 <h1>DANI0098</h1>
-<div>پنل شخصی پیامک آزمایشی</div>
+<div class="subtitle">پنل مدیریت پیامک شخصی</div>
 </header>
 
-<div class="card note">
-حالت آزمایشی فعال است. هیچ پیامکی ارسال نمی‌شود و نام فرستنده جعل نمی‌شود.
+<div class="notice">
+حالت آزمایشی فعال است. این پنل پیام واقعی ارسال نمی‌کند و نام فرستنده صرفاً برای پیش‌نمایش است.
 </div>
 
 <section class="card">
-<h3 style="color:#dfbd75">ساخت پیام آزمایشی</h3>
-<label>شماره گیرنده</label>
-<input id="phone" placeholder="شماره موبایل">
+<h3>ساخت پیام جدید</h3>
+
+<label>شماره موبایل گیرنده</label>
+<input id="phone" type="tel"
+placeholder="09123456789"
+maxlength="15">
+
 <label>متن پیام</label>
-<textarea id="msg" placeholder="متن پیام را بنویس..."></textarea>
-<button onclick="showPreview()">پیش‌نمایش پیام</button>
+<textarea id="message"
+maxlength="500"
+placeholder="متن پیام خود را بنویسید..."></textarea>
+
+<button onclick="previewMessage()">
+پیش‌نمایش پیام
+</button>
+
 <div id="preview" class="preview" hidden></div>
-<button onclick="saveMessage()">ثبت در تاریخچه</button>
+
+<button onclick="saveMessage()">
+ثبت در تاریخچه
+</button>
 </section>
 
 <section class="card">
-<h3 style="color:#dfbd75">تاریخچه پیام‌ها</h3>
-<div id="history"><small>هنوز پیامی ثبت نشده است.</small></div>
-<button onclick="clearHistory()">پاک کردن تاریخچه</button>
+<h3>تاریخچه پیام‌ها</h3>
+<div id="history">
+<small>هنوز پیامی ثبت نشده است.</small>
+</div>
+
+<button class="secondary" onclick="clearHistory()">
+پاک کردن تاریخچه
+</button>
 </section>
+
+<footer>
+DANI0098 · DEMO VERSION
+</footer>
+
 </main>
 
 <script>
-const $=id=>document.getElementById(id);
-function getData(){
- try{return JSON.parse(localStorage.getItem('dani0098')||'[]')}
- catch(e){return []}
-}
-function safe(s){
- return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function showPreview(){
- let p=$('phone').value.trim(),m=$('msg').value.trim();
- if(!p||!m){alert('شماره و متن را وارد کن');return}
- $('preview').hidden=false;
- $('preview').textContent='فرستنده: DANI0098 DEMO\nگیرنده: '+p+'\n\n'+m+'\n\nاین پیام ارسال نشده است.';
-}
-function saveMessage(){
- let p=$('phone').value.trim(),m=$('msg').value.trim();
- if(!p||!m){alert('شماره و متن را وارد کن');return}
- let d=getData();
- d.push({p,m,t:new Date().toLocaleString('fa-IR')});
- localStorage.setItem('dani0098',JSON.stringify(d));
- render();
- alert('در تاریخچه آزمایشی ثبت شد؛ پیامکی ارسال نشده است.');
-}
-function render(){
- let d=getData();
- $('history').innerHTML=d.length?d.slice().reverse().map(x=>'<div class="entry"><b>'+safe(x.p)+'</b><br>'+safe(x.m)+'<br><small>'+safe(x.t)+' · آزمایشی</small></div>').join():'<small>هنوز پیامی ثبت نشده است.</small>';
-}
-function clearHistory(){
- if(confirm('تاریخچه پاک شود؟')){
- localStorage.removeItem('dani0098');render();
+const storageKey="dani0098_history";
+
+function getHistory(){
+ try{
+  return JSON.parse(localStorage.getItem(storageKey)||"[]");
+ }catch(e){
+  return [];
  }
 }
-render();
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,function(c){
+  return {
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#39;"
+  }[c];
+ });
+}
+
+function getValues(){
+ return {
+  phone:document.getElementById("phone").value.trim(),
+  message:document.getElementById("message").value.trim()
+ };
+}
+
+function previewMessage(){
+ const data=getValues();
+
+ if(!data.phone||!data.message){
+  alert("شماره و متن پیام را وارد کنید.");
+  return;
+ }
+
+ const preview=document.getElementById("preview");
+ preview.hidden=false;
+ preview.textContent=
+  "فرستنده نمایشی: DANI0098\n"+
+  "گیرنده: "+data.phone+"\n\n"+
+  data.message+
+  "\n\nاین پیام ارسال نشده است.";
+}
+
+function saveMessage(){
+ const data=getValues();
+
+ if(!data.phone||!data.message){
+  alert("شماره و متن پیام را وارد کنید.");
+  return;
+ }
+
+ const history=getHistory();
+
+ history.push({
+  phone:data.phone,
+  message:data.message,
+  date:new Date().toLocaleString("fa-IR")
+ });
+
+ localStorage.setItem(storageKey,JSON.stringify(history));
+
+ renderHistory();
+
+ alert("پیام در تاریخچه آزمایشی ذخیره شد.");
+}
+
+function renderHistory(){
+ const history=getHistory();
+ const box=document.getElementById("history");
+
+ if(history.length===0){
+  box.innerHTML="<small>هنوز پیامی ثبت نشده است.</small>";
+  return;
+ }
+
+ box.innerHTML=history.slice().reverse().map(item=>
+  '<div class="entry">'+
+  '<b>'+escapeHTML(item.phone)+'</b><br>'+
+  escapeHTML(item.message)+'<br>'+
+  '<small>'+escapeHTML(item.date)+'</small>'+
+  '</div>'
+ ).join("");
+}
+
+function clearHistory(){
+ if(confirm("آیا تاریخچه پاک شود؟")){
+  localStorage.removeItem(storageKey);
+  renderHistory();
+ }
+}
+
+renderHistory();
 </script>
+
 </body>
 </html>
